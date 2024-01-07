@@ -9,7 +9,7 @@ use CIBlockType;
 
 class Version20240104143001 extends Version
 {
-    protected $description = "";
+    protected $description = "Создание инфоблока и свойства";
 
     protected $moduleVersion = "4.6.1";
 
@@ -18,7 +18,7 @@ class Version20240104143001 extends Version
         if (!\CModule::IncludeModule("iblock")) {
             die('Модуль "Инфоблоки" не установлен');
         }
-        
+
         $type = 'catalog'; // Уникальный ID типа
 
 // Создаем инфоблок
