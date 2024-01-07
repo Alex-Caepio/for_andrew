@@ -16,6 +16,7 @@
 /bitrix/php_interface/dbconn.php
 /bitrix/php_interface/after_connect.php
 /bitrix/php_interface/after_connect_d7.php
+
 /bitrix/.settings.php
 /bitrix/.settings_extra.php
 /bitrix/admin/.htaccess
