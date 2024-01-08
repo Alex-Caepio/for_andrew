@@ -19,9 +19,8 @@ class Version20240104143001 extends Version
             die('Модуль "Инфоблоки" не установлен');
         }
 
-        $type = 'catalog'; // Уникальный ID типа
+        $type = 'catalog';
 
-// Создаем инфоблок
         $iblock = new CIBlock;
         $iblockID = $iblock->Add(array(
             'ACTIVE' => 'Y',
@@ -39,7 +38,6 @@ class Version20240104143001 extends Version
             echo 'Ошибка создания инфоблока';
         }
 
-// Создаем свойство для инфоблока
         $ibp = new CIBlockProperty;
         $PropID = $ibp->Add(array(
             'NAME' => 'Новое свойство',
@@ -63,20 +61,16 @@ class Version20240104143001 extends Version
             die('Модуль "Инфоблоки" не установлен');
         }
 
-        // Код инфоблока, который был создан
         $iblockCode = 'new_catalog';
 
-        // Получаем ID инфоблока по его коду
         $iblockID = CIBlock::GetList([], ['CODE' => $iblockCode])->Fetch()['ID'];
 
         if ($iblockID) {
-            // Удаляем свойства инфоблока
             $properties = CIBlockProperty::GetList([], ["IBLOCK_ID" => $iblockID]);
             while ($prop_fields = $properties->GetNext()) {
                 CIBlockProperty::Delete($prop_fields["ID"]);
             }
-
-            // Удаляем инфоблок
+            
             if (!CIBlock::Delete($iblockID)) {
                 echo "Ошибка удаления инфоблока\n";
             } else {

@@ -13,9 +13,9 @@ class Version20240105230153 extends Version
 
     protected $description = "Добавление нового поля в Highload-блок NewHighloadBlock";
 
-    protected $highloadBlockName = 'NewHighloadBlock'; // Имя вашего Highload-блока
-    protected $fieldName = 'UF_NEW_FIELD'; // Код нового поля
-    protected $fieldType = 'string'; // Тип нового поля (string, integer, datetime и т.д.)
+    protected $highloadBlockName = 'NewHighloadBlock';
+    protected $fieldName = 'UF_NEW_FIELD';
+    protected $fieldType = 'string';
 
     public function up()
     {
@@ -23,13 +23,11 @@ class Version20240105230153 extends Version
             throw new SystemException('Модуль "Highload-блоки" не установлен');
         }
 
-        // Получаем ID Highload-блока
         $highloadBlockId = $this->getHighloadBlockId($this->highloadBlockName);
         if (!$highloadBlockId) {
             throw new SystemException("Highload-блок {$this->highloadBlockName} не найден");
         }
 
-        // Добавляем новое поле
         $userTypeEntity = new \CUserTypeEntity();
         $userFieldId = $userTypeEntity->Add([
             'ENTITY_ID' => 'HLBLOCK_' . $highloadBlockId,
@@ -54,14 +52,12 @@ class Version20240105230153 extends Version
         if (!Loader::includeModule('highloadblock')) {
             throw new SystemException('Модуль "Highload-блоки" не установлен');
         }
-
-        // Получаем ID Highload-блока
+        
         $highloadBlockId = $this->getHighloadBlockId($this->highloadBlockName);
         if (!$highloadBlockId) {
             throw new SystemException("Highload-блок {$this->highloadBlockName} не найден");
         }
 
-        // Находим и удаляем поле
         $dbRes = \CUserTypeEntity::GetList([], [
             'ENTITY_ID' => 'HLBLOCK_' . $highloadBlockId,
             'FIELD_NAME' => $this->fieldName
