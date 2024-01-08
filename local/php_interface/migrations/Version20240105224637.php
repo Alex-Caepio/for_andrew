@@ -16,7 +16,6 @@ class Version20240105224637 extends Version
             die('Модуль "Highload-блоки" не установлен');
         }
 
-        // Добавление Highload-блока
         $result = HLBT::add([
             'NAME' => 'NewHighloadBlock',
             'TABLE_NAME' => 'new_highloadblock',
@@ -28,11 +27,9 @@ class Version20240105224637 extends Version
 
         $highloadBlockId = $result->getId();
 
-        // Добавление стандартных полей
         $fields = [
-            'UF_NAME' => 'string', // Тип данных - строка
-            'UF_DATE' => 'datetime' // Тип данных - дата/время
-            // Другие поля можно добавить здесь
+            'UF_NAME' => 'string',
+            'UF_DATE' => 'datetime'
         ];
 
         foreach ($fields as $fieldName => $fieldType) {
@@ -57,8 +54,7 @@ class Version20240105224637 extends Version
         if (!\Bitrix\Main\Loader::includeModule('highloadblock')) {
             die('Модуль "Highload-блоки" не установлен');
         }
-
-        // Поиск и удаление Highload-блока
+        
         $result = HLBT::getList([
             'filter' => ['=NAME' => 'NewHighloadBlock']
         ]);
